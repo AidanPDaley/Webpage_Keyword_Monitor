@@ -29,14 +29,12 @@ def getKeywords():
 
 def createSoup(htmlText, htmlClass=None, htmlID=None):
     soup = BeautifulSoup(htmlText, "html.parser")
-    # later add way to change the class value
-    # maybe create a new function that creates the soup
-    # so that this is only for searching the soup
     if (htmlClass):
         soup = soup.find_all(class_=htmlClass)
     if (htmlID):
         soup = soup.find_all(id=htmlID)
     return soup
+
 # searches to see if keywords are present in specified tag and returns
 # list of the contents of that tag if keyword is present
 def searchKeywords(soup, keywords):
