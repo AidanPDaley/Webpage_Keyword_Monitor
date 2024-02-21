@@ -27,14 +27,19 @@ def addKeyword(keyword):
 def getKeywords():
     pass
 
-# searches to see if keywords are present in specified tag and returns
-# list of the contents of that tag if keyword is present
-def searchKeywords(htmlText, keywords):
+def createSoup(htmlText, htmlClass=None, htmlID=None):
     soup = BeautifulSoup(htmlText, "html.parser")
     # later add way to change the class value
     # maybe create a new function that creates the soup
     # so that this is only for searching the soup
-    soup = soup.find_all(class_="product-card__name")
+    if (htmlClass):
+        soup = soup.find_all(class_=htmlClass)
+    if (htmlID):
+        soup = soup.find_all(id=htmlID)
+    return soup
+# searches to see if keywords are present in specified tag and returns
+# list of the contents of that tag if keyword is present
+def searchKeywords(soup, keywords):
     for child in soup:
         for keyword in keywords:
             if (keyword in str(child.string)):
@@ -46,6 +51,13 @@ if __name__ == "__main__":
     addWebsite("https://bjjfanatics.com/collections/daily-deals?page=2")
     addWebsite("https://bjjfanatics.com/collections/daily-deals?page=3")
 
-    webpageContent = getWebsite("https://bjjfanatics.com/collections/daily-deals?page=1")
+    websiteContent = getWebsite("https://bjjfanatics.com/collections/daily-deals?page=1")
 
-    searchKeywords(webpageContent, ["Bodoni", "Mica", "Danaher", "Meregali"])
+    soup = createSoup(websiteContent,htmlClass="product-card__name")
+    searchKeywords(soup, ["Bodoni", "Mica", "Danaher", "Meregali", "Jones", "Ryan"])
+
+
+
+
+
+
