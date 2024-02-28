@@ -1,21 +1,47 @@
 # Class to hold information about what the user wants to monitor
+import requests
+from bs4 import BeautifulSoup
+
 class WebMonitor:
     def __init__(self, url=None, htmlClass=None, htmlID=None, email=None, keywords=[]):
         self.url = url
         self.htmlClass = htmlClass
         self.htmlID = htmlID
         self.email = email
-        self.keywords = []
+        self.keywords = keywords 
+        self.soup = None
+
+    # Soup
+    def createSoup(self):
+        soup = BeautifulSoup(self.getHtmlText(), "html.parser")
+        if (self.htmlClass):
+            soup = soup.find_all(class_=self.htmlClass)
+        if (self.htmlID):
+            soup = soup.find_all(id=self.htmlID)
+        self.soup = soup
+    
+    def searchKeywords(self):
+        for child in self.soup:
+            for keyword in self.keywords:
+                if (keyword in str(child.string)):
+                    print(str(child.string))
+
+    def getSoup(self):
+        return self.soup
 
     # Getter Methods
     def getUrl(self):
         return self.url
 
+    def getHtmlText(self):
+        r = requests.get(self.url)
+        return r.text
+
     def getHtmlClass(self):
         return self.htmlClass
     
     def getHtmlID(self):
-        return self.getHtmlID(self)
+        return self.htmlID
 
     def getEmail(self):
         return self.email
@@ -45,8 +71,7 @@ class WebMonitor:
 
     def deleteKeyword(self, keyword):
         self.keywords = [w for w in self.keywords if w != keyword]
-
-
+    
     def __str__(self):
         print(f"{self.url}, {self.htmlClass}, {self.htmlID}, {self.email}, {self.keywords}")
 
