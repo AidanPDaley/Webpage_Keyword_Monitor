@@ -13,18 +13,19 @@ class WebMonitor:
 
     # Soup
     def createSoup(self):
-        soup = BeautifulSoup(self.getHtmlText(), "html.parser")
+        self.soup = BeautifulSoup(self.getHtmlText(), "html.parser")
         if (self.htmlClass):
-            soup = soup.find_all(class_=self.htmlClass)
+            self.soup = self.soup.find_all(class_=self.htmlClass)
         if (self.htmlID):
-            soup = soup.find_all(id=self.htmlID)
-        self.soup = soup
+            self.soup = self.soup.find_all(id=self.htmlID)
     
     def searchKeywords(self):
+        result = ""
         for child in self.soup:
             for keyword in self.keywords:
                 if (keyword in str(child.string)):
-                    print(str(child.string))
+                    result += str(child.string)
+        return result
 
     def getSoup(self):
         return self.soup
