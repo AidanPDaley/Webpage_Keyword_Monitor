@@ -3,7 +3,8 @@ import requests
 from bs4 import BeautifulSoup
 
 class WebMonitor:
-    def __init__(self, url=None, htmlClass=None, htmlID=None, email=None, keywords=[]):
+    def __init__(self, name=None, url=None, htmlClass=None, htmlID=None, email=None, keywords=[]):
+        self.name = name 
         self.url = url
         self.htmlClass = htmlClass
         self.htmlID = htmlID
@@ -31,6 +32,9 @@ class WebMonitor:
         return self.soup
 
     # Getter Methods
+    def getName(self):
+        return self.name
+
     def getUrl(self):
         return self.url
 
@@ -51,6 +55,9 @@ class WebMonitor:
         return self.keywords
     
     # Setters
+    def setName(self, name):
+        self.name = name
+
     def setUrl(self, url):
         self.url = url
 
