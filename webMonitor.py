@@ -81,7 +81,7 @@ class WebMonitor:
         self.keywords = [w for w in self.keywords if w != keyword]
     
     def __str__(self):
-        print(f"{self.url}, {self.htmlClass}, {self.htmlID}, {self.email}, {self.keywords}")
+        print(f"{self.name}, {self.url}, {self.htmlClass}, {self.htmlID}, {self.email}, {self.keywords}")
 
 if __name__ == "__main__":
     test = WebMonitor()
