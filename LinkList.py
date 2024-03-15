@@ -1,13 +1,20 @@
 #Linked List
 
 class Node:
-    def __init__(self, data):
+    def __init__(self, name, data):
+        self.name = name
         self.data = data
         self.next = None
 
+    def getName(self):
+        return self.name
+
     def getNext(self):
         return self.next
-    
+
+    def setName(self, name):
+        return self.name
+
     def setNext(self, next):
         self.next = next
     
@@ -16,7 +23,9 @@ class Node:
 
     def printData(self):
         print(self.data)
-
+    
+    def __str__(self):
+        print(f"Name: {self.name}, Data: {self.data}, --> ")
 
 class LinkList:
     def __init__(self):
@@ -39,7 +48,7 @@ class LinkList:
             self.tail = node
         
     def deleteNode(self, nodeData):
-        node = Node(None)
+        node = Node(None, None)
         node.setNext(self.head)
 
         # delete from beginning
@@ -61,10 +70,9 @@ class LinkList:
         node = self.head
         if (node == None):
             print("Empty List")
-            return
-
+            return 
         while (node != None):
-            node.printData() 
+            print(node.getData().__str__())
             node = node.getNext()
 
 if __name__ == "__main__":
@@ -75,10 +83,11 @@ if __name__ == "__main__":
 
     print("Print List Test")
     for i in range(10):
-        llist.addNode(Node(i))
+        llist.addNode(Node(f"Name{i}", i))
     
     llist.printList()
-    
+
+
     print("Deletion Test:")
     llist.deleteNode(6)
     llist.deleteNode(1)

@@ -3,7 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 
 class WebMonitor:
-    def __init__(self, name=None, url=None, htmlClass=None, htmlID=None, email=None, keywords=[]):
+    def __init__(self, name="None", url="None", htmlClass="None", htmlID="None", email="None", keywords=[]):
         self.name = name 
         self.url = url
         self.htmlClass = htmlClass
@@ -15,9 +15,9 @@ class WebMonitor:
     # Soup
     def createSoup(self):
         self.soup = BeautifulSoup(self.getHtmlText(), "html.parser")
-        if (self.htmlClass):
+        if (self.htmlClass != "None"):
             self.soup = self.soup.find_all(class_=self.htmlClass)
-        if (self.htmlID):
+        if (self.htmlID != "None"):
             self.soup = self.soup.find_all(id=self.htmlID)
     
     def searchKeywords(self):
