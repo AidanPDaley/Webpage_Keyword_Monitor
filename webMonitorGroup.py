@@ -39,7 +39,7 @@ class WebMonitorGroup:
     
     # deletes webMonitor by name (add webmonitor name to WebMonitor Class)
     def deleteWebMonitor(self, name):
-        pass
+        self.group.deleteNodeByName(name)
     
     # lists the names of the webMonitors
     def listWebMonitors(self):
@@ -49,4 +49,8 @@ class WebMonitorGroup:
 if __name__ == "__main__":
     wmg = WebMonitorGroup("./urlFile.txt")
     wmg.createWebMonitors()
+    print("First Group:==============}") 
+    wmg.listWebMonitors() 
+    wmg.deleteWebMonitor("bjj5")
+    print("Post Deletion:============") 
     wmg.listWebMonitors() 

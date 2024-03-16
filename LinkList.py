@@ -89,7 +89,7 @@ class LinkList:
             print("Empty List")
             return 
         while (node != None):
-            print(node.getData().__str__())
+            print(node.getData().getName())
             node = node.getNext()
 
 if __name__ == "__main__":
