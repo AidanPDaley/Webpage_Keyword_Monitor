@@ -59,12 +59,29 @@ class LinkList:
         while (node.getNext() != None and node.getNext().getNext() != None):
             if (node.getNext().getData() == nodeData):
                 node.setNext(node.getNext().getNext())
-            node = node.getNext()
+            else:
+                node = node.getNext()
         # delete from the end 
         if (self.tail.getData() == nodeData):
             self.tail = node
             self.tail.setNext(None)
         
+    def deleteNodeByName(self, nodeName):
+        node = Node(None, None)
+        node.setNext(self.head)
+
+        # delete from beginning
+        if (self.head.getName() == nodeName):
+            self.head = self.head.getNext()
+        # delete from middle
+        while (node.getNext() != None and node.getNext().getNext() != None):
+            if (node.getNext().getName() == nodeName):
+                node.setNext(node.getNext().getNext())
+            else:
+                node = node.getNext() # delete from the end 
+        if (self.tail.getName() == nodeName):
+            self.tail = node
+            self.tail.setNext(None)
 
     def printList(self):
         node = self.head
@@ -84,7 +101,7 @@ if __name__ == "__main__":
     print("Print List Test")
     for i in range(10):
         llist.addNode(Node(f"Name{i}", i))
-    
+        llist.addNode(Node(f"Name{i}", i))
     llist.printList()
 
 
@@ -93,6 +110,7 @@ if __name__ == "__main__":
     llist.deleteNode(1)
     llist.deleteNode(9)
     llist.deleteNode(0)
+    llist.deleteNodeByName("Name2")
     llist.printList()
     
 

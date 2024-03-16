@@ -22,7 +22,7 @@ class WebMonitorGroup:
     # takes line from file, returns web monitor object 
     def parseLineToWebMonitor(self, line):
 
-        line = line.strip().split(", ")
+        line = [l.strip() for l in line.split(",")]
         wm = WebMonitor(name=line[0], \
                         url=line[1], \
                         htmlClass=line[2], \
