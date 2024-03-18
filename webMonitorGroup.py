@@ -4,7 +4,6 @@ from LinkList import *
 class WebMonitorGroup:
     def __init__(self, webMonitorFile):
         self.webMonitorFile = webMonitorFile
-        # look at different data structure (Doubly linked list?) 
         self.group = LinkList() 
     
     # reads from webMonitorFile and stores webmonitors in the group property
@@ -34,17 +33,27 @@ class WebMonitorGroup:
     # writes new webmonitor data to file
     def addWebMonitor(self, wm):
         node = Node(name=wm.getName(), data=wm)
-        #print(f"Name: {node.getName()}, Data: {node.getData()}")
         self.group.addNode(node) 
     
-    # deletes webMonitor by name (add webmonitor name to WebMonitor Class)
+    # deletes webMonitor by name
     def deleteWebMonitor(self, name):
         self.group.deleteNodeByName(name)
     
+    
+    def runWebMonitors(self):
+        node = self.group.getHead()
+        while (node):
+            wm = node.getData()
+            wm.createSoup()
+            wm.searchKeywords()
+            wm.printResult()
+            node = node.getNext()
+
     # lists the names of the webMonitors
     def listWebMonitors(self):
+        print("Web Monitors: ")
         self.group.printList()
-
+        print()
 
 if __name__ == "__main__":
     wmg = WebMonitorGroup("./urlFile.txt")

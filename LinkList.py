@@ -12,14 +12,17 @@ class Node:
     def getNext(self):
         return self.next
 
+    def getData(self):
+        return self.data
+
     def setName(self, name):
         return self.name
 
     def setNext(self, next):
         self.next = next
     
-    def getData(self):
-        return self.data
+    def setData(self, data):
+        self.data = data
 
     def printData(self):
         print(self.data)
@@ -37,7 +40,6 @@ class LinkList:
 
     def getTail(self):
         return self.tail
-
 
     def addNode(self, node):
         if (self.head == None):
@@ -78,7 +80,8 @@ class LinkList:
             if (node.getNext().getName() == nodeName):
                 node.setNext(node.getNext().getNext())
             else:
-                node = node.getNext() # delete from the end 
+                node = node.getNext()
+        # delete from the end 
         if (self.tail.getName() == nodeName):
             self.tail = node
             self.tail.setNext(None)

@@ -11,6 +11,7 @@ class WebMonitor:
         self.email = email
         self.keywords = keywords 
         self.soup = None
+        self.result = ""
 
     # Soup
     def createSoup(self):
@@ -21,12 +22,12 @@ class WebMonitor:
             self.soup = self.soup.find_all(id=self.htmlID)
     
     def searchKeywords(self):
-        result = ""
         for child in self.soup:
             for keyword in self.keywords:
                 if (keyword in str(child.string)):
-                    result += str(child.string)
-        return result
+                    self.result += str(child.string)
+        if self.result == "":
+            self.result = "No Matches\n"
 
     def getSoup(self):
         return self.soup
@@ -53,6 +54,9 @@ class WebMonitor:
     
     def getKeywords(self):
         return self.keywords
+
+    def getResult(self):
+        return self.result
     
     # Setters
     def setName(self, name):
@@ -79,9 +83,13 @@ class WebMonitor:
 
     def deleteKeyword(self, keyword):
         self.keywords = [w for w in self.keywords if w != keyword]
-    
+   
+    def printResult(self):
+        print(f"{self.name} Result: \n{self.result}")
+
     def __str__(self):
-        print(f"{self.name}, {self.url}, {self.htmlClass}, {self.htmlID}, {self.email}, {self.keywords}")
+        print(f"{self.name}, {self.url}, {self.htmlClass}, \
+        {self.htmlID}, {self.email}, {self.keywords}")
 
 if __name__ == "__main__":
     test = WebMonitor()
