@@ -53,7 +53,7 @@ class WebMonitorGroup:
     def listWebMonitors(self):
         print("Web Monitors: ")
         self.group.printList()
-        print()
+    
 
 if __name__ == "__main__":
     wmg = WebMonitorGroup("./urlFile.txt")
